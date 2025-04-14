@@ -46,3 +46,15 @@ if __name__ == "__main__":
     dtypes = [t.dtype for t in model.decompress.input_signature]
 
     decompress(model, args)
+
+
+
+    # Replace 'path/to/your/folder' with the actual folder path
+    folder_path = args.binary_path
+
+    # Loop through all files in the specified folder
+    for filename in os.listdir(folder_path):
+        if filename.endswith('.pth'):
+            file_path = os.path.join(folder_path, filename)
+            file_size = os.path.getsize(file_path)
+            print(f"Size of '{filename}': {file_size} bytes")

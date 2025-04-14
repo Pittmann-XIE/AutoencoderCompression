@@ -13,6 +13,15 @@ def load_img(path):
 
 def load_model(args):
     model = tf.keras.models.load_model(args.model_path,compile=False)
+
+    if hasattr(model, 'analysis_transform'):
+        print("\nAnalysis Transform:")
+        model.analysis_transform.summary()
+        
+    if hasattr(model, 'synthesis_transform'):
+        print("\nSynthesis Transform:")
+        model.synthesis_transform.summary()
+
     return model
 
 
@@ -52,8 +61,9 @@ def compress(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('model_path',type=str, default='final_model')
-    parser.add_argument('image_path',type=str, default='kodak/kodim20.png')
+    # parser.add_argument('image_path',type=str, default='kodak/kodim20.png')
 
     args = parser.parse_args()
+    load_model(args)
 
     compress(args)

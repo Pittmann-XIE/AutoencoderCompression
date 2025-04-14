@@ -36,6 +36,7 @@ Traditional codecs that were developed in the past decades depended on hand craf
 # Architecture
 The architecture we used is based on the one proposed in [1] with a main simplification; we omit the GAN discriminator segment of the proposed model (and subsequent training pipeline). The reasoning behind this is to reduce the model’s complexity- which poses a challenge with respect to runtime and computational resources even for the relatively small COCO dataset. We also note that the autoencoder structure alone is sufficient to produce reasonable compression with visually acceptable results for a lower computational cost. 
     The architecture consists of three building blocks:
+
 Residual Block: Consists of two Conv2D layers each followed by a Generalized Divisive Normalization layer proposed in [3]. The GDN layer is a non-linear transformation layer with learnable parameters that aim to reduce the entropy of the responses, achieving a significantly smaller mutual information between transformed components. A skip connection is used to mitigate the problem of vanishing gradient by allowing an alternate shortcut path for gradient to flow through thus allowing the model to learn an identity function which ensures that the higher layer will perform at least as good as the lower layer, and not worse.
 
 ![Residual Block](images/resblock.png?raw=true)

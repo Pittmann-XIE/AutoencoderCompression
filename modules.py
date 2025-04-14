@@ -124,7 +124,7 @@ out_ch = 32
 
 ##Encoder
 
-img_input = Input(shape=(None, None, 3), name='Image')
+img_input = Input(shape=(256, 256, 3), name='Image')
 
 ResBlock_1 = convolutional_block(img_input, ch, 1, 1)
 ResBlock_2 = convolutional_block(ResBlock_1, ch, 0, 1)
@@ -135,9 +135,12 @@ ResBlock_5 = convolutional_block(ResBlock_4, ch, 1, 1)
 ResBlock_6 = convolutional_block(ResBlock_5, ch, 0, 1)
 NLAM_2 = NLAM(ResBlock_6, ch, 0)
 final_conv2d = Conv2D(out_ch, kernel_size=3, strides=2, padding='same',
-                      activation=LeakyReLU(alpha=0.2))(NLAM_2)
+                       activation=LeakyReLU(alpha=0.2))(NLAM_2)
 
 Encoder = Model(inputs=img_input, outputs=final_conv2d, name='Encoder')
+print("Encoder Summary")
+print("="*80)   
+Encoder.summary()
 
 ##Decoder
 decoder_input = Input(shape=(None, None, out_ch), name='Decoder_Input')
@@ -154,7 +157,11 @@ UpResBlock_3 = UpSample(ResBlock_3, ch)
 ResBlock_4 = convolutional_block(UpResBlock_3, ch, 0, 2)
 UpResBlock_4 = UpSample(ResBlock_4, 3)
 
-Decoder = Model(inputs=decoder_input, outputs=UpResBlock_4, name='Decoder')
+Decoder = Model(inputs=decoder_input, outputs=UpResBlock_2, name='Decoder')
+# print("decoder Summary")
+# print("="*80)   
+# Decoder.summary()
+
 
 
 class AutoencoderModel(tf.keras.Model):
