@@ -158,9 +158,9 @@ ResBlock_4 = convolutional_block(UpResBlock_3, ch, 0, 2)
 UpResBlock_4 = UpSample(ResBlock_4, 3)
 
 Decoder = Model(inputs=decoder_input, outputs=UpResBlock_2, name='Decoder')
-# print("decoder Summary")
-# print("="*80)   
-# Decoder.summary()
+print("decoder Summary")
+print("="*80)   
+Decoder.summary()
 
 
 

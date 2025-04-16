@@ -1,0 +1,6 @@
+# config
+model_path: "/home/fe/xie/AutoencoderCompression_pytorch/final_model"
+image_path: "/home/fe/xie/datasets/dummy/valid"
+binary_path: "/home/fe/xie/AutoencoderCompression_pytorch/outputs/binary"
+reconstruction_path: "/home/fe/xie/AutoencoderCompression_pytorch/outputs/reconstruction"
+annotated_path: "/home/fe/xie/AutoencoderCompression_pytorch/outputs/annotated"

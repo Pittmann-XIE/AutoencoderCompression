@@ -1,0 +1,25 @@
+# config.yaml
+defaults: 
+    - _self_
+    - train_setting: try1
+    - override hydra/launcher: submitit_slurm
+
+hydra:
+    launcher:
+        #name: 'SpLi'
+        timeout_min: 4320
+        partition: gpu
+        gpus_per_task: 2
+        tasks_per_node: 2  # Match GPUs per node
+        cpus_per_task: 8   # 4-8 CPUs per GPU recommended
+       # gres: gpu
+      #  cpus_per_task: 4   
+        # mem_per_cpu: 20000  # Memory per CPU in MB     
+        #array_parallelism: 3
+        
+#slurm:
+  #  job:
+       # name: "SpLi"
+      #  time: "24:00:00"  # Job time limit
+        # email: "pengtao.xie@hhi.fraunhofer.de"  # Email for notifications
+        # mail_type: "BEGIN,END,FAIL"  # Notification types

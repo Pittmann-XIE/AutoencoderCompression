@@ -6,6 +6,9 @@ from glob import glob
 
 def load_model(args):
     model = tf.keras.models.load_model(args.model_path,compile=False)
+    if hasattr(model, 'analysis_transform'):
+        print("\nAnalysis Transform:")
+        model.analysis_transform.summary()
     return model
 
 def decompress(model, args):
@@ -36,8 +39,8 @@ def decompress(model, args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('model_path')
-    parser.add_argument('binary_path')
+    parser.add_argument('--model_path', default='./final_model')
+    parser.add_argument('--binary_path', default="./outputs/binary")
 
 
     args = parser.parse_args()
@@ -45,16 +48,16 @@ if __name__ == "__main__":
     model = load_model(args)
     dtypes = [t.dtype for t in model.decompress.input_signature]
 
-    decompress(model, args)
+    # decompress(model, args)
 
 
 
-    # Replace 'path/to/your/folder' with the actual folder path
-    folder_path = args.binary_path
+    # # Replace 'path/to/your/folder' with the actual folder path
+    # folder_path = args.binary_path
 
-    # Loop through all files in the specified folder
-    for filename in os.listdir(folder_path):
-        if filename.endswith('.pth'):
-            file_path = os.path.join(folder_path, filename)
-            file_size = os.path.getsize(file_path)
-            print(f"Size of '{filename}': {file_size} bytes")
+    # # Loop through all files in the specified folder
+    # for filename in os.listdir(folder_path):
+    #     if filename.endswith('.pth'):
+    #         file_path = os.path.join(folder_path, filename)
+    #         file_size = os.path.getsize(file_path)
+    #         print(f"Size of '{filename}': {file_size} bytes")

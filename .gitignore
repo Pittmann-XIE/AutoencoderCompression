@@ -1,1 +1,6 @@
-/binary/*
+/multirun/*
+*.pyc
+*.pth
+/outputs/*
+/final_model/*
+/__pycache__/
